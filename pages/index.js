@@ -35,6 +35,17 @@ export default function Home() {
       <div className="page">
         <h1>Dreamy Editor</h1>
         <div className="card">
+          <div className="buttons">
+            <div className="button active">
+              <strong>B</strong>
+            </div>
+            <div className="button ">
+              <i>I</i>
+            </div>
+            <div className="button ">
+              <u>U</u>
+            </div>
+          </div>
           <Slate
             editor={editor}
             value={value}
@@ -59,6 +70,12 @@ export default function Home() {
                   case "i": {
                     event.preventDefault();
                     CustomEditor.toggleMark(editor, "italic");
+                    break;
+                  }
+
+                  case "u": {
+                    event.preventDefault();
+                    CustomEditor.toggleMark(editor, "underline");
                     break;
                   }
                 }
