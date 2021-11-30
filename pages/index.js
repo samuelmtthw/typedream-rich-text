@@ -1,11 +1,10 @@
 import React, { useCallback, useMemo, useState } from "react";
-import { createEditor, Editor, Text, Transforms } from "slate";
+import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import CodeElement from "../components/CodeElement";
 import DefaultElement from "../components/DefaultElement";
 import Leaf from "../components/Leaf";
 import CustomEditor from "../helpers/CustomEditor";
-import styles from "../styles/Home.module.css";
+import Head from "next/head";
 
 export default function Home() {
   const editor = useMemo(() => withReact(createEditor()), []);
@@ -13,53 +12,61 @@ export default function Home() {
   const [value, setValue] = useState([
     {
       type: "paragraph",
-      children: [{ text: "A line of text in a paragraph." }],
+      children: [
+        {
+          text: "This is a rich-text area. Try to type something in here. \n\nYou can format the words using Ctrl or Command (Mac). Select the words that you want to format, and type the shortcut (Command + B for bold text).",
+        },
+      ],
     },
   ]);
 
-  const renderElement = useCallback((props) => {
-    switch (props.element.type) {
-      case "code":
-        return <CodeElement {...props} />;
-      default:
-        return <DefaultElement {...props} />;
-    }
-  });
+  const renderElement = useCallback((props) => <DefaultElement {...props} />);
 
   const renderLeaf = useCallback((props) => {
     return <Leaf {...props} />;
   });
 
   return (
-    <Slate
-      editor={editor}
-      value={value}
-      onChange={(newValue) => setValue(newValue)}
-    >
-      <Editable
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        onKeyDown={(event) => {
-          console.log(event.key);
-          if (!event.ctrlKey) {
-            return;
-          }
+    <>
+      <Head>
+        <title>Rich Text Area</title>
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+      </Head>
+      <div className="page">
+        <h1>Dreamy Editor</h1>
+        <div className="card">
+          <Slate
+            editor={editor}
+            value={value}
+            onChange={(newValue) => setValue(newValue)}
+          >
+            <Editable
+              renderElement={renderElement}
+              renderLeaf={renderLeaf}
+              placeholder={"Type something over here..."}
+              onKeyDown={(event) => {
+                if (!event.ctrlKey && !event.metaKey) {
+                  return;
+                }
 
-          switch (event.key) {
-            case "`": {
-              event.preventDefault();
-              CustomEditor.toggleCodeBlock(editor);
-              break;
-            }
+                switch (event.key) {
+                  case "b": {
+                    event.preventDefault();
+                    CustomEditor.toggleMark(editor, "bold");
+                    break;
+                  }
 
-            case "b": {
-              event.preventDefault();
-              CustomEditor.toggleBoldMark(editor);
-              break;
-            }
-          }
-        }}
-      />
-    </Slate>
+                  case "i": {
+                    event.preventDefault();
+                    CustomEditor.toggleMark(editor, "italic");
+                    break;
+                  }
+                }
+              }}
+            />
+          </Slate>
+        </div>
+      </div>
+    </>
   );
 }

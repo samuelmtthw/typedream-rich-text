@@ -14,3 +14,30 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px 50px;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #5e5df0;
+  text-shadow: 4px 4px 15px #8181e0;
+}
+
+.card {
+  padding: 20px;
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 0 30px -6px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  min-height: 75vh;
+}
+
+p {
+  margin: 0;
+}
