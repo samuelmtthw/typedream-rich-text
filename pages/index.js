@@ -6,6 +6,7 @@ import Leaf from "../components/Leaf";
 import CustomEditor from "../helpers/CustomEditor";
 import Head from "next/head";
 import FormatButton from "../components/FormatButton.js";
+import BlockButton from "../components/BlockButton";
 
 export default function Home() {
   const editor = useMemo(() => withReact(createEditor()), []);
@@ -42,15 +43,18 @@ export default function Home() {
             onChange={(newValue) => setValue(newValue)}
           >
             <div className="buttons">
-              <FormatButton editor={editor} format="bold">
+              <FormatButton format="bold">
                 <strong>B</strong>
               </FormatButton>
-              <FormatButton editor={editor} format="italic">
+              <FormatButton format="italic">
                 <i>I</i>
               </FormatButton>
-              <FormatButton editor={editor} format="underline">
+              <FormatButton format="underline">
                 <u>U</u>
               </FormatButton>
+              <BlockButton>
+                <strong>""</strong>
+              </BlockButton>
             </div>
             <Editable
               renderElement={renderElement}
