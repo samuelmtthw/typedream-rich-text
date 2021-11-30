@@ -18,9 +18,7 @@ const CustomEditor = {
     const [match] = Editor.nodes(editor, {
       at: Editor.unhangRange(editor, selection),
       match: (n) =>
-        // !Editor.isEditor(n) &&
-        // Element.isElement(n) &&
-        n.type === "code",
+        !Editor.isEditor(n) && Element.isElement(n) && n.type === "heading",
     });
     return !!match;
   },
@@ -37,11 +35,10 @@ const CustomEditor = {
 
   toggleBlock(editor) {
     const isActive = CustomEditor.isBlockActive(editor);
-    Transforms.setNodes(
-      editor,
-      { type: isActive ? null : "code" },
-      { match: (n) => Editor.isBlock(editor, n) }
-    );
+
+    Transforms.setNodes(editor, {
+      type: isActive ? "paragraph" : "heading",
+    });
   },
 };
 

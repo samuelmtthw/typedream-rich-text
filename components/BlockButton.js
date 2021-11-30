@@ -5,7 +5,6 @@ function BlockButton({ children }) {
   const editor = useSlate();
   const handleClick = (event) => {
     event.preventDefault();
-    console.log("blockbutton called");
     CustomEditor.toggleBlock(editor);
   };
 

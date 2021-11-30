@@ -5,7 +5,7 @@ import DefaultElement from "../components/DefaultElement";
 import Leaf from "../components/Leaf";
 import CustomEditor from "../helpers/CustomEditor";
 import Head from "next/head";
-import FormatButton from "../components/FormatButton.js";
+import FormatButton from "../components/FormatButton";
 import BlockButton from "../components/BlockButton";
 
 export default function Home() {
@@ -52,11 +52,15 @@ export default function Home() {
               <FormatButton format="underline">
                 <u>U</u>
               </FormatButton>
+              <FormatButton format="code">
+                <span>{"<>"}</span>
+              </FormatButton>
               <BlockButton>
-                <strong>""</strong>
+                <strong>H</strong>
               </BlockButton>
             </div>
             <Editable
+              autoFocus
               renderElement={renderElement}
               renderLeaf={renderLeaf}
               placeholder={"Type something over here..."}

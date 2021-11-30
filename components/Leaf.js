@@ -19,6 +19,10 @@ function Leaf({ attributes, leaf, children }) {
     style.textDecoration = "none";
   }
 
+  if (leaf.code) {
+    children = <code>{children}</code>;
+  }
+
   return (
     <span {...attributes} style={style}>
       {children}
