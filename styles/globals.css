@@ -26,7 +26,7 @@ a {
 h1 {
   font-size: 3rem;
   color: #5e5df0;
-  text-shadow: 4px 4px 15px #8181e0;
+  text-shadow: 4px 4px 15px rgba(129, 129, 224, 0.836);
 }
 
 .card {
@@ -70,4 +70,13 @@ p {
 .active {
   color: #5e5df0;
   border: 1px solid #b7b7fd;
+}
+
+a {
+  color: #5e5df0;
+  font-weight: 900;
+}
+
+a:hover {
+  text-decoration: underline;
 }

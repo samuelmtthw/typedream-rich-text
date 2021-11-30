@@ -5,6 +5,7 @@ import DefaultElement from "../components/DefaultElement";
 import Leaf from "../components/Leaf";
 import CustomEditor from "../helpers/CustomEditor";
 import Head from "next/head";
+import FormatButton from "../components/FormatButton.js";
 
 export default function Home() {
   const editor = useMemo(() => withReact(createEditor()), []);
@@ -35,22 +36,22 @@ export default function Home() {
       <div className="page">
         <h1>Dreamy Editor</h1>
         <div className="card">
-          <div className="buttons">
-            <div className="button active">
-              <strong>B</strong>
-            </div>
-            <div className="button ">
-              <i>I</i>
-            </div>
-            <div className="button ">
-              <u>U</u>
-            </div>
-          </div>
           <Slate
             editor={editor}
             value={value}
             onChange={(newValue) => setValue(newValue)}
           >
+            <div className="buttons">
+              <FormatButton editor={editor} format="bold">
+                <strong>B</strong>
+              </FormatButton>
+              <FormatButton editor={editor} format="italic">
+                <i>I</i>
+              </FormatButton>
+              <FormatButton editor={editor} format="underline">
+                <u>U</u>
+              </FormatButton>
+            </div>
             <Editable
               renderElement={renderElement}
               renderLeaf={renderLeaf}
@@ -83,6 +84,14 @@ export default function Home() {
             />
           </Slate>
         </div>
+        <br />
+        <footer>
+          <small>
+            Created by{" "}
+            <a href="https://github.com/samuelmtthw">Samuel Matthew</a> for
+            Typedream
+          </small>
+        </footer>
       </div>
     </>
   );
